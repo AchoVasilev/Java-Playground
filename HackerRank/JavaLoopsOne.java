@@ -1,19 +1,29 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.util.Scanner;
 
 public class JavaLoopsOne {
-	public static void main(String[] args) throws IOException {
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+	public static void main(String[] args) {
 
-		int N = Integer.parseInt(bufferedReader.readLine().trim());
+		class Solution {
+			public static void main(String[] argh) {
+				Scanner in = new Scanner(System.in);
+				int t = in.nextInt();
+				var num1 = 0;
+				var num2 = 0;
+				for (int i = 0; i < t; i++) {
+					int a = in.nextInt();
+					int b = in.nextInt();
+					int n = in.nextInt();
 
-		for(int i = 1; i <= 10; i++) {
-			int sum = N * i;
+					for (int k = 0; k < n; k++) {
+						num1 = a;
+						num2 += (Math.pow(2, k) * b);
+						System.out.print(num1 + num2 + " ");
 
-			System.out.println(N + " x " + i + " = " + sum);
+					}
+				}
+				in.close();
+			}
 		}
-
-		bufferedReader.close();
 	}
 }
