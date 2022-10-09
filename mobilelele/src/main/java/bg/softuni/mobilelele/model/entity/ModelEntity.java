@@ -7,11 +7,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "models")
 public class ModelEntity extends BaseEntity {
+	@Column(nullable = false)
 	private String name;
 
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private CategoryEnum category;
 
+	@Column(nullable = false)
 	private String imageUrl;
 
 	private int startYear;
@@ -83,7 +86,7 @@ public class ModelEntity extends BaseEntity {
 				", imageUrl='" + imageUrl + '\'' +
 				", startYear=" + startYear +
 				", endYear=" + endYear +
-				", brand=" + brand +
+				", brand=" + (brand != null ? brand.getName() : null) +
 				'}';
 	}
 }

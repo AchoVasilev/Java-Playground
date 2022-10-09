@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "brands")
 public class BrandEntity extends BaseEntity {
+	@Column(nullable = false)
 	private String name;
 
 	@OneToMany(
@@ -29,7 +30,16 @@ public class BrandEntity extends BaseEntity {
 		return models;
 	}
 
-	public void setModels(List<ModelEntity> models) {
+	public BrandEntity setModels(List<ModelEntity> models) {
 		this.models = models;
+		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "BrandEntity{" +
+				"name='" + name + '\'' +
+				", models=" + models +
+				'}';
 	}
 }
