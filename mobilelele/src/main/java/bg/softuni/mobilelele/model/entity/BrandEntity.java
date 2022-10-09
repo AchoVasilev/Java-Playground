@@ -1,12 +1,20 @@
 package bg.softuni.mobilelele.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "brands")
-public class BrandEntity extends BaseEntity{
+public class BrandEntity extends BaseEntity {
 	private String name;
+
+	@OneToMany(
+			mappedBy = "brand",
+			fetch = FetchType.EAGER,
+			cascade = CascadeType.ALL
+	)
+	private List<ModelEntity> models = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -15,5 +23,13 @@ public class BrandEntity extends BaseEntity{
 	public BrandEntity setName(String name) {
 		this.name = name;
 		return this;
+	}
+
+	public List<ModelEntity> getModels() {
+		return models;
+	}
+
+	public void setModels(List<ModelEntity> models) {
+		this.models = models;
 	}
 }
