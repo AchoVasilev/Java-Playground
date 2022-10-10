@@ -32,6 +32,9 @@ public class OfferEntity {
 	@Column(nullable = false)
 	private BigDecimal price;
 
+	@Column(nullable = false)
+	private String description;
+
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private TransmissionEnum transmission;
@@ -43,6 +46,15 @@ public class OfferEntity {
 
 	@ManyToOne
 	private UserEntity seller;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public OfferEntity setDescription(String description) {
+		this.description = description;
+		return this;
+	}
 
 	public UUID getId() {
 		return id;
@@ -128,6 +140,7 @@ public class OfferEntity {
 				", imageUrl='" + imageUrl + '\'' +
 				", mileage=" + mileage +
 				", price=" + price +
+				", description='" + description + '\'' +
 				", transmission=" + transmission +
 				", year=" + year +
 				", model=" + model +
