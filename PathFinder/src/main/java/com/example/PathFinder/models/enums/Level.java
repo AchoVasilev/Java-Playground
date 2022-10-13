@@ -1,6 +1,6 @@
 package com.example.PathFinder.models.enums;
 
-public enum UserLevel {
+public enum Level {
 	BEGINNER,
 	INTERMEDIATE,
 	ADVANCED

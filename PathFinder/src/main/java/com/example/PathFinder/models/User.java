@@ -1,6 +1,6 @@
 package com.example.PathFinder.models;
 
-import com.example.PathFinder.models.enums.UserLevel;
+import com.example.PathFinder.models.enums.Level;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -34,7 +34,7 @@ public class User {
 	private Set<Role> roles;
 
 	@Enumerated(EnumType.STRING)
-	private UserLevel level;
+	private Level level;
 
 	public long getId() {
 		return id;
@@ -81,11 +81,11 @@ public class User {
 		return this;
 	}
 
-	public UserLevel getLevel() {
+	public Level getLevel() {
 		return level;
 	}
 
-	public User setLevel(UserLevel level) {
+	public User setLevel(Level level) {
 		this.level = level;
 		return this;
 	}
