@@ -21,8 +21,15 @@ public class UserLoginController {
 
 	@PostMapping("users/login")
 	public String login(UserLoginInputModel model) {
-		System.out.println("User is logged: " + this.userService.login(model));
-		
+		this.userService.login(model);
+
+		return "redirect:/";
+	}
+
+	@GetMapping("/users/logout")
+	public String logout() {
+		this.userService.logout();
+
 		return "redirect:/";
 	}
 }
