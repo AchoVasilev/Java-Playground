@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements IUserService {
-	private Logger logger = LoggerFactory.getLogger(IUserService.class);
-	private IUserRepository userRepository;
-	private CurrentUser currentUser;
-	private PasswordEncoder passwordEncoder;
+	private final Logger logger = LoggerFactory.getLogger(IUserService.class);
+	private final IUserRepository userRepository;
+	private final CurrentUser currentUser;
+	private final PasswordEncoder passwordEncoder;
 
 	public UserService(IUserRepository userRepository, CurrentUser currentUser, PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
