@@ -1,4 +1,4 @@
-package com.example.PathFinder.services;
+package com.example.PathFinder.services.route;
 
 import com.example.PathFinder.models.Route;
 import com.example.PathFinder.repositories.IRouteRepository;

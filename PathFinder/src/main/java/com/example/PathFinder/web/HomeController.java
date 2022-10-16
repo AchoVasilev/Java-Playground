@@ -1,6 +1,6 @@
 package com.example.PathFinder.web;
 
-import com.example.PathFinder.services.IRouteService;
+import com.example.PathFinder.services.route.IRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

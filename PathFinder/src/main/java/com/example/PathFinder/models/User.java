@@ -82,6 +82,24 @@ public class User {
 		return this;
 	}
 
+	public String getFullName() {
+		return fullName;
+	}
+
+	public User setFullName(String fullName) {
+		this.fullName = fullName;
+		return this;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public User setAge(int age) {
+		this.age = age;
+		return this;
+	}
+
 	public Level getLevel() {
 		return level;
 	}
