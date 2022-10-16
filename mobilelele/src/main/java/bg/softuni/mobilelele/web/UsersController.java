@@ -1,15 +1,11 @@
 package bg.softuni.mobilelele.web;
 
-import bg.softuni.mobilelele.dto.UserLoginInputModel;
-import bg.softuni.mobilelele.dto.UserRegisterInputModel;
+import bg.softuni.mobilelele.model.dto.UserLoginInputModel;
 import bg.softuni.mobilelele.services.user.IUserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
