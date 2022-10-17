@@ -1,7 +1,7 @@
 package bg.softuni.mobilelele.services.user;
 
-import bg.softuni.mobilelele.model.dto.UserLoginInputModel;
-import bg.softuni.mobilelele.model.dto.UserRegisterInputModel;
+import bg.softuni.mobilelele.model.dto.user.UserLoginInputModel;
+import bg.softuni.mobilelele.model.dto.user.UserRegisterInputModel;
 import bg.softuni.mobilelele.model.entity.UserEntity;
 import bg.softuni.mobilelele.model.mapper.UserMapper;
 import bg.softuni.mobilelele.repositories.IUserRepository;

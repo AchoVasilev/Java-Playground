@@ -1,4 +1,4 @@
-package bg.softuni.mobilelele.model.dto;
+package bg.softuni.mobilelele.model.dto.user;
 
 public class UserLoginInputModel {
 	private String username;

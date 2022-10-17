@@ -1,5 +1,5 @@
 package bg.softuni.mobilelele.model.mapper;
-import bg.softuni.mobilelele.model.dto.UserRegisterInputModel;
+import bg.softuni.mobilelele.model.dto.user.UserRegisterInputModel;
 import bg.softuni.mobilelele.model.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
