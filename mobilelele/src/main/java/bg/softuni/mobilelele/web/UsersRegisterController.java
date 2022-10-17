@@ -35,7 +35,9 @@ public class UsersRegisterController {
     public String register(@Valid UserRegisterInputModel userModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userModel", userModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
+            redirectAttributes
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
+
             return "redirect:/users/register";
         }
 
