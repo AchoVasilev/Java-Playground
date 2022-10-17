@@ -1,11 +1,17 @@
 package bg.softuni.mobilelele.model.dto;
 
+import bg.softuni.mobilelele.model.validation.FieldMatch;
 import bg.softuni.mobilelele.model.validation.UniqueUserEmail;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+@FieldMatch(
+		firstField = "password",
+		secondField = "confirmPassword",
+		message = "Passwords do not match"
+)
 public class UserRegisterInputModel {
 	@NotEmpty(message = "User email should be provided")
 	@Email(message = "User email should be valid")
