@@ -3,10 +3,16 @@ package bg.softuni.mobilelele.model.dto.offer;
 import bg.softuni.mobilelele.model.enums.EngineEnum;
 import bg.softuni.mobilelele.model.enums.TransmissionEnum;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class AddOfferInputModel {
+
+    @NotNull
+    @Min(1)
+    private Long modelId;
+
     @NotNull
     private EngineEnum engine;
 
@@ -40,6 +46,15 @@ public class AddOfferInputModel {
 
     public AddOfferInputModel setTransmission(TransmissionEnum transmission) {
         this.transmission = transmission;
+        return this;
+    }
+
+    public Long getModelId() {
+        return modelId;
+    }
+
+    public AddOfferInputModel setModelId(Long modelId) {
+        this.modelId = modelId;
         return this;
     }
 }

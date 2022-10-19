@@ -1,6 +1,7 @@
 package bg.softuni.mobilelele.web;
 
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
+import bg.softuni.mobilelele.services.brand.IBrandService;
 import bg.softuni.mobilelele.services.offer.IOfferService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,12 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/offers")
 public class OffersController {
-    private IOfferService offerService;
+    private final IOfferService offerService;
+    private final IBrandService brandService;
 
-    public OffersController(IOfferService offerService) {
+    public OffersController(IOfferService offerService, IBrandService brandService) {
         this.offerService = offerService;
+        this.brandService = brandService;
     }
 
     @GetMapping("/all")
@@ -31,6 +34,8 @@ public class OffersController {
         if (!model.containsAttribute("addOfferModel")) {
              model.addAttribute("addOfferModel", new AddOfferInputModel());
         }
+
+        model.addAttribute("brands", this.brandService.getAllBrands());
 
         return "offer-add";
     }
@@ -47,6 +52,8 @@ public class OffersController {
 
             return "redirect:/offers/add";
         }
+
+        this.offerService.createOffer(addOfferModel);
 
         return "redirect";
     }
