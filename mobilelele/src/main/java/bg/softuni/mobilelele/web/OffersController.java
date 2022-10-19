@@ -55,6 +55,6 @@ public class OffersController {
 
         this.offerService.createOffer(addOfferModel);
 
-        return "redirect";
+        return "redirect:/offers/all";
     }
 }

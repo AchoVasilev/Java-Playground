@@ -64,6 +64,7 @@ public class UserService implements IUserService {
 
     private void login(UserEntity entity) {
         currentUser.setLoggedIn(true)
-                .setName(entity.getFirstName() + " " + entity.getLastName());
+                .setName(entity.getFirstName() + " " + entity.getLastName())
+                .setEmail(entity.getEmail());
     }
 }

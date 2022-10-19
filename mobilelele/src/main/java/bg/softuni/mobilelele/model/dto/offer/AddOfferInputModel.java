@@ -6,6 +6,8 @@ import bg.softuni.mobilelele.model.enums.TransmissionEnum;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import java.math.BigDecimal;
 
 public class AddOfferInputModel {
 
@@ -21,6 +23,17 @@ public class AddOfferInputModel {
 
     @NotEmpty
     private String imageUrl;
+
+    @Positive
+    @NotNull
+    private BigDecimal price;
+
+    @Positive
+    @NotNull
+    private Integer year;
+
+    @NotEmpty
+    private String description;
 
     public EngineEnum getEngine() {
         return engine;
