@@ -1,6 +1,7 @@
 package bg.softuni.mobilelele.model.dto.offer;
 
 import bg.softuni.mobilelele.model.enums.EngineEnum;
+import bg.softuni.mobilelele.model.enums.TransmissionEnum;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -8,6 +9,9 @@ import javax.validation.constraints.NotNull;
 public class AddOfferInputModel {
     @NotNull
     private EngineEnum engine;
+
+    @NotNull
+    private TransmissionEnum transmission;
 
     @NotEmpty
     private String imageUrl;
@@ -27,6 +31,15 @@ public class AddOfferInputModel {
 
     public AddOfferInputModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public TransmissionEnum getTransmission() {
+        return transmission;
+    }
+
+    public AddOfferInputModel setTransmission(TransmissionEnum transmission) {
+        this.transmission = transmission;
         return this;
     }
 }
