@@ -34,9 +34,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(
-                            @Valid UserRegistrationInputModel userModel,
-                           BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes) {
+            @Valid UserRegistrationInputModel userModel,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userModel", userModel);
