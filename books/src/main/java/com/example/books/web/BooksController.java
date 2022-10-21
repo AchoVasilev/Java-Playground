@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/books")
 public class BooksController {
@@ -27,5 +29,12 @@ public class BooksController {
         }
 
         return ResponseEntity.ok(bookDto.get());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<BookDTO>> getAllBooks() {
+        var books = this.bookService.getAllBooks();
+
+        return ResponseEntity.ok(books);
     }
 }

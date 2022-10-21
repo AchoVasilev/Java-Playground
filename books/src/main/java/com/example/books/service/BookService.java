@@ -6,7 +6,9 @@ import com.example.books.model.entity.BookEntity;
 import com.example.books.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -19,6 +21,13 @@ public class BookService {
     public Optional<BookDTO> getBookById(Long bookId) {
         return this.bookRepository.findById(bookId)
                 .map(this::map);
+    }
+
+    public List<BookDTO> getAllBooks() {
+        return this.bookRepository.findAll()
+                .stream()
+                .map(this::map)
+                .collect(Collectors.toList());
     }
 
     private BookDTO map(BookEntity bookEntity) {
