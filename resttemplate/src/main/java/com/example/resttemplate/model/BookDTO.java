@@ -45,4 +45,14 @@ public class BookDTO {
         this.author = author;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "BookDTO{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", author=" + author.getName() +
+                '}';
+    }
 }
