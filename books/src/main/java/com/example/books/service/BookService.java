@@ -23,6 +23,10 @@ public class BookService {
                 .map(this::map);
     }
 
+    public void deleteById(Long bookId) {
+        this.bookRepository.deleteById(bookId);
+    }
+
     public List<BookDTO> getAllBooks() {
         return this.bookRepository.findAll()
                 .stream()

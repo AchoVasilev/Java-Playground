@@ -8,6 +8,8 @@ function onLoadBooks(event) {
     };
 
     let authorsContainer = document.getElementById('authors-container');
+    authorsContainer.innerHTML = '';
+
     let url = 'http://localhost:8080/api/books';
     fetch(url, options)
         .then(response => response.json())

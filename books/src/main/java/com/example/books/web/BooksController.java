@@ -3,10 +3,7 @@ package com.example.books.web;
 import com.example.books.model.dto.BookDTO;
 import com.example.books.service.BookService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +33,12 @@ public class BooksController {
         var books = this.bookService.getAllBooks();
 
         return ResponseEntity.ok(books);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<BookDTO> deleteBook(@PathVariable("id") Long bookId) {
+        this.bookService.deleteById(bookId);
+
+        return ResponseEntity.noContent().build();
     }
 }
