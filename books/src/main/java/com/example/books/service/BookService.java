@@ -34,6 +34,10 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
+    public Long createBook(BookDTO book) {
+        return 50L;
+    }
+
     private BookDTO map(BookEntity bookEntity) {
         return new BookDTO()
                 .setId(bookEntity.getId())
