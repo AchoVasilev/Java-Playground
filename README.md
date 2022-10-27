@@ -1,2 +1,2 @@
 # Java-Playground
-Basic Java exercises.
+Basic Java exercises and projects.
