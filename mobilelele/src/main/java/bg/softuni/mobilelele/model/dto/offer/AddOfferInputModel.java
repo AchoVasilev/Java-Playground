@@ -35,6 +35,10 @@ public class AddOfferInputModel {
     @NotEmpty
     private String description;
 
+    @Positive
+    @NotNull
+    private Integer mileage;
+
     public EngineEnum getEngine() {
         return engine;
     }
@@ -68,6 +72,42 @@ public class AddOfferInputModel {
 
     public AddOfferInputModel setModelId(Long modelId) {
         this.modelId = modelId;
+        return this;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public AddOfferInputModel setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public AddOfferInputModel setYear(Integer year) {
+        this.year = year;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public AddOfferInputModel setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public Integer getMileage() {
+        return mileage;
+    }
+
+    public AddOfferInputModel setMileage(Integer mileage) {
+        this.mileage = mileage;
         return this;
     }
 }

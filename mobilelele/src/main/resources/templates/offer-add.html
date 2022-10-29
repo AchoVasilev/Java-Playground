@@ -44,6 +44,8 @@
             <div class="form-group col-md-6 mb-3">
                 <label for="price" class="text-white font-weight-bold">Price</label>
                 <input id="price" type="number" min="0" step="100" class="form-control"
+                       th:field="*{price}"
+                       th:errorclass="is-invalid"
                        placeholder="Suggested price"/>
                 <p  class="errors alert alert-danger">
                     Suggested price is required.
@@ -86,6 +88,8 @@
             <div class="form-group col-md-6 mb-3">
                 <label for="year" class="text-white font-weight-bold">Year</label>
                 <input id="year" type="number" min="1900" max="2099" step="1" class="form-control"
+                       th:field="*{year}"
+                       th:errorclass="is-invalid"
                        placeholder="Manufacturing year"/>
                 <p class="errors alert alert-danger">
                     Manufacturing year is required.
@@ -94,6 +98,8 @@
             <div class="form-group col-md-6 mb-3">
                 <label for="mileage" class="text-white font-weight-bold">Mileage</label>
                 <input id="mileage" type="number" min="0" max="900000" step="1000"
+                       th:field="*{mileage}"
+                       th:errorclass="is-invalid"
                        class="form-control"
                        placeholder="Mileage in kilometers"/>
                 <p class="errors alert alert-danger">
@@ -105,6 +111,8 @@
         <div class="form-group">
             <label class="text-white font-weight-bold" for="description">Description</label>
             <textarea id="description" type="textarea" class="form-control" rows="3"
+                      th:field="*{description}"
+                      th:errorclass="is-invalid"
                       placeholder="Description"></textarea>
             <p class="errors alert alert-danger">
                 Description is required.
@@ -113,6 +121,8 @@
         <div class="form-group">
             <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
             <input id="imageUrl" type="url" class="form-control"
+                   th:field="*{imageUrl}"
+                   th:errorclass="is-invalid"
                    placeholder="Put vehicle image URL here">
             <p class="errors alert alert-danger">
                 Vehicle image URL is required.

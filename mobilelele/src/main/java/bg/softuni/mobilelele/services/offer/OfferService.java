@@ -5,6 +5,7 @@ import bg.softuni.mobilelele.model.mapper.OfferMapper;
 import bg.softuni.mobilelele.repositories.IModelRepository;
 import bg.softuni.mobilelele.repositories.IOfferRepository;
 import bg.softuni.mobilelele.repositories.IUserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,20 +26,20 @@ public class OfferService implements IOfferService {
         this.offerMapper = offerMapper;
     }
 
-    public void createOffer(AddOfferInputModel offerModel) {
+    public void createOffer(AddOfferInputModel offerModel, UserDetails userDetails) {
         var offer = this.offerMapper
                 .addOfferInputModelToOfferEntity(offerModel);
 
-//        var user = this.userRepository
-//                .findByEmail(this.currentUser.getEmail())
-//                .orElseThrow();
+        var user = this.userRepository
+                .findByEmail(userDetails.getUsername())
+                .orElseThrow();
 
         var model = this.modelRepository
                 .findById(offerModel.getModelId())
                 .orElseThrow();
 
-//        offer.setModel(model)
-//                .setSeller(user);
+        offer.setModel(model)
+                .setSeller(user);
 
         this.offerRepository.save(offer);
     }

@@ -3,6 +3,8 @@ package bg.softuni.mobilelele.web;
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
 import bg.softuni.mobilelele.services.brand.IBrandService;
 import bg.softuni.mobilelele.services.offer.IOfferService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,7 +46,8 @@ public class OffersController {
     public String add(
             @Valid AddOfferInputModel addOfferModel,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal UserDetails userDetails) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addOfferModel", addOfferModel);
             redirectAttributes
@@ -53,7 +56,7 @@ public class OffersController {
             return "redirect:/offers/add";
         }
 
-        this.offerService.createOffer(addOfferModel);
+        this.offerService.createOffer(addOfferModel, userDetails);
 
         return "redirect:/offers/all";
     }
