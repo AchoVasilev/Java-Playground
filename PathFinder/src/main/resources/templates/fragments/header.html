@@ -1,29 +1,31 @@
-<header>
+<header xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <nav class="main-nav">
         <ul>
             <li>
                 <a href="/">Home</a>
             </li>
-            <li>
+            <li sec:authorize="isAnonymous()">
                 <a href="/">Login</a>
             </li>
             <li>
-                <a th:href="@{/register}">Register</a>
+                <a th:href="@{/register}" sec:authorize="isAnonymous()">Register</a>
             </li>
             <li>
                 <a href="/">About</a>
             </li>
             <li>
-                <a href="/">Add new route</a>
+                <a href="/" sec:authorize="isAuthenticated()">Add new route</a>
             </li>
             <li>
-                <a href="/">Profile</a>
+                <a href="/users/profile" sec:authorize="isAuthenticated()">Profile</a>
             </li>
             <li>
-                <a href="/">Admin</a>
+                <a href="/" sec:authorize="hasRole('ADMIN')">Admin</a>
             </li>
-            <li>
-                <a href="/">Logout</a>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/users/logout}" th:method="post">
+                    <button type="submit">Logout</button>
+                </form>
             </li>
         </ul>
     </nav>
