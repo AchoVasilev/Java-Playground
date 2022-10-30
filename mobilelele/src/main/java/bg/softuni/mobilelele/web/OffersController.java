@@ -3,6 +3,8 @@ package bg.softuni.mobilelele.web;
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
 import bg.softuni.mobilelele.services.brand.IBrandService;
 import bg.softuni.mobilelele.services.offer.IOfferService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,10 @@ public class OffersController {
     }
 
     @GetMapping("/all")
-    public String allOffers() {
+    public String allOffers(Model model, @PageableDefault(page = 0, size = 5) Pageable pageable) {
+
+        model.addAttribute("offers", this.offerService.getAllOffers(pageable));
+
         return "offers";
     }
 

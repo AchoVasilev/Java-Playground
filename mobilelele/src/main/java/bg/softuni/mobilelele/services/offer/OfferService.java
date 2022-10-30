@@ -1,10 +1,13 @@
 package bg.softuni.mobilelele.services.offer;
 
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
+import bg.softuni.mobilelele.model.dto.offer.OfferDetailsDTO;
 import bg.softuni.mobilelele.model.mapper.OfferMapper;
 import bg.softuni.mobilelele.repositories.IModelRepository;
 import bg.softuni.mobilelele.repositories.IOfferRepository;
 import bg.softuni.mobilelele.repositories.IUserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +45,10 @@ public class OfferService implements IOfferService {
                 .setSeller(user);
 
         this.offerRepository.save(offer);
+    }
+
+    public Page<OfferDetailsDTO> getAllOffers(Pageable pageable) {
+        return this.offerRepository.findAll(pageable)
+                .map(this.offerMapper::offerEntityToOfferDetailsDTO);
     }
 }
