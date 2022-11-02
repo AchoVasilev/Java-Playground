@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -30,5 +31,10 @@ public class CommentsApiController {
 
         return ResponseEntity.created(URI.create(String.format("/api/%d/comments/%d",routeId, result.getId())))
                 .body(result);
+    }
+
+    @GetMapping("/{routeId}/comments")
+    public ResponseEntity<List<CommentDisplayView>> getComments(@PathVariable("routeId") Long routeId) {
+        return ResponseEntity.ok(this.commentService.getAllRouteComments(routeId));
     }
 }

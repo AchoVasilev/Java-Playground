@@ -1,5 +1,6 @@
 package com.example.PathFinder.services.comment;
 
+import com.example.PathFinder.exceptions.RouteNotFoundException;
 import com.example.PathFinder.models.Comment;
 import com.example.PathFinder.repositories.ICommentRepository;
 import com.example.PathFinder.repositories.IRouteRepository;
@@ -9,6 +10,8 @@ import com.example.PathFinder.viewModels.comment.CommentDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService implements ICommentService {
@@ -37,5 +40,21 @@ public class CommentService implements ICommentService {
         var result = new CommentDisplayView(comment.getId(), author.getUsername(), comment.getText());
 
         return result;
+    }
+
+    public List<CommentDisplayView> getAllRouteComments(Long routeId){
+        var route = this.routeRepository.findById(routeId).orElseThrow(RouteNotFoundException::new);
+
+        var comments = this.commentRepository.findAllByRoute(route)
+                .get()
+                .stream()
+                .map(comment -> new CommentDisplayView(
+                        comment.getId(),
+                        comment.getAuthor().getFullName(),
+                        comment.getText()
+                ))
+                .collect(Collectors.toList());
+
+        return comments;
     }
 }
