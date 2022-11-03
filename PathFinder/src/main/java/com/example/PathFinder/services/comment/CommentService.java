@@ -7,7 +7,9 @@ import com.example.PathFinder.repositories.IRouteRepository;
 import com.example.PathFinder.repositories.IUserRepository;
 import com.example.PathFinder.viewModels.comment.CommentDisplayView;
 import com.example.PathFinder.viewModels.comment.CommentDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
 import java.util.List;

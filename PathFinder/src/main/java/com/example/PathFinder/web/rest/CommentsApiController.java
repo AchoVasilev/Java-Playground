@@ -1,5 +1,7 @@
 package com.example.PathFinder.web.rest;
 
+import com.example.PathFinder.exceptions.RouteNotFoundException;
+import com.example.PathFinder.services.comment.ErrorApiResponse;
 import com.example.PathFinder.services.comment.ICommentService;
 import com.example.PathFinder.viewModels.comment.CommentDisplayView;
 import com.example.PathFinder.viewModels.comment.CommentDto;
@@ -36,5 +38,12 @@ public class CommentsApiController {
     @GetMapping("/{routeId}/comments")
     public ResponseEntity<List<CommentDisplayView>> getComments(@PathVariable("routeId") Long routeId) {
         return ResponseEntity.ok(this.commentService.getAllRouteComments(routeId));
+    }
+
+
+    @ExceptionHandler({RouteNotFoundException.class})
+    public ResponseEntity<ErrorApiResponse> handleRouteNotFound() {
+        return ResponseEntity.status(404)
+                .body(new ErrorApiResponse("Such route doesn't exist", 1004));
     }
 }
