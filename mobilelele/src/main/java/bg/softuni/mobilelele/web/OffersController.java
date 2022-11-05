@@ -8,6 +8,7 @@ import bg.softuni.mobilelele.services.offer.IOfferService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.UUID;
 
 @Controller
@@ -78,8 +80,9 @@ public class OffersController {
         return "details";
     }
 
+    @PreAuthorize("@offerService.isOwner(#principal.name, #id)")
     @DeleteMapping("/{id}")
-    public String deleteOffer(@PathVariable("id") UUID id) {
+    public String deleteOffer(Principal principal, @PathVariable("id") UUID id) {
         this.offerService.deleteOfferById(id);
 
         return "redirect:/offers/all";

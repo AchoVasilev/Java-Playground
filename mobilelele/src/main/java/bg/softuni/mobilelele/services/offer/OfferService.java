@@ -3,6 +3,8 @@ package bg.softuni.mobilelele.services.offer;
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
 import bg.softuni.mobilelele.model.dto.offer.OfferDetailsDTO;
 import bg.softuni.mobilelele.model.dto.offer.SearchOfferDTO;
+import bg.softuni.mobilelele.model.entity.UserEntity;
+import bg.softuni.mobilelele.model.enums.UserRoleEnum;
 import bg.softuni.mobilelele.model.mapper.OfferMapper;
 import bg.softuni.mobilelele.repositories.IModelRepository;
 import bg.softuni.mobilelele.repositories.IOfferRepository;
@@ -73,5 +75,29 @@ public class OfferService implements IOfferService {
 
     public void deleteOfferById(UUID offerId) {
         this.offerRepository.deleteById(offerId);
+    }
+
+    public boolean isOwner(String userName, UUID offerId) {
+        var isOwner = this.offerRepository
+                .findById(offerId)
+                .filter(o -> o.getSeller().getEmail().equals(userName))
+                .isPresent();
+
+        if (isOwner) {
+            return true;
+        }
+
+        var isAdmin = this.userRepository
+                .findByEmail(userName)
+                .filter(user -> this.isAdmin(user))
+                .isPresent();
+
+        return isAdmin;
+    }
+
+    private boolean isAdmin(UserEntity user) {
+        return user.getUserRoles()
+                .stream()
+                .anyMatch(r -> r.getUserRole() == UserRoleEnum.ADMIN);
     }
 }

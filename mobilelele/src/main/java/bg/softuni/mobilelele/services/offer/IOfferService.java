@@ -21,4 +21,6 @@ public interface IOfferService {
     Optional<OfferDetailsDTO> findOfferById(UUID offerId);
 
     void deleteOfferById(UUID offerId);
+
+    boolean isOwner(String userName, UUID offerId);
 }
