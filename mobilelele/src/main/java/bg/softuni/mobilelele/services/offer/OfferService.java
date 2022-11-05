@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,5 +64,14 @@ public class OfferService implements IOfferService {
                 .stream()
                 .map(offer -> offerMapper.offerEntityToOfferDetailsDTO(offer))
                 .collect(Collectors.toList());
+    }
+
+    public Optional<OfferDetailsDTO> findOfferById(UUID offerId) {
+        return this.offerRepository.findById(offerId)
+                .map(offerEntity -> this.offerMapper.offerEntityToOfferDetailsDTO(offerEntity));
+    }
+
+    public void deleteOfferById(UUID offerId) {
+        this.offerRepository.deleteById(offerId);
     }
 }

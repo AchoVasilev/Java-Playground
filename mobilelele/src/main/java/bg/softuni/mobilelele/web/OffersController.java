@@ -1,5 +1,6 @@
 package bg.softuni.mobilelele.web;
 
+import bg.softuni.mobilelele.exceptions.ObjectNotFoundException;
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
 import bg.softuni.mobilelele.model.dto.offer.SearchOfferDTO;
 import bg.softuni.mobilelele.services.brand.IBrandService;
@@ -12,10 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -70,9 +68,21 @@ public class OffersController {
         return "redirect:/offers/all";
     }
 
-    @GetMapping("/{id}/details")
-    public String getOfferDetails(@PathVariable("id") UUID id) {
+    @GetMapping("/{id}")
+    public String getOfferDetails(@PathVariable("id") UUID id, Model model) {
+        var offer = this.offerService.findOfferById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Offer with id " + id + " not found"));
+
+        model.addAttribute("offer", offer);
+
         return "details";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteOffer(@PathVariable("id") UUID id) {
+        this.offerService.deleteOfferById(id);
+
+        return "redirect:/offers/all";
     }
 
     @GetMapping("/search")

@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface IOfferService {
     void createOffer(AddOfferInputModel offerModel, UserDetails userDetails);
@@ -15,4 +17,8 @@ public interface IOfferService {
     Page<OfferDetailsDTO> getAllOffers(Pageable pageable);
 
     List<OfferDetailsDTO> searchOffer(SearchOfferDTO searchOfferDTO);
+
+    Optional<OfferDetailsDTO> findOfferById(UUID offerId);
+
+    void deleteOfferById(UUID offerId);
 }

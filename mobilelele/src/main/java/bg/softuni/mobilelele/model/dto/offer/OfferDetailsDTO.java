@@ -17,6 +17,32 @@ public class OfferDetailsDTO {
     private EngineEnum engine;
     private TransmissionEnum transmission;
 
+    private String sellerFirstName;
+
+    private String sellerLastName;
+
+    public String getSellerFullName() {
+        return this.getSellerFirstName() + " " + this.getSellerLastName();
+    }
+
+    public String getSellerFirstName() {
+        return sellerFirstName;
+    }
+
+    public OfferDetailsDTO setSellerFirstName(String sellerFirstName) {
+        this.sellerFirstName = sellerFirstName;
+        return this;
+    }
+
+    public String getSellerLastName() {
+        return sellerLastName;
+    }
+
+    public OfferDetailsDTO setSellerLastName(String sellerLastName) {
+        this.sellerLastName = sellerLastName;
+        return this;
+    }
+
     public UUID getId() {
         return id;
     }
