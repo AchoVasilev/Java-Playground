@@ -1,6 +1,7 @@
 package bg.softuni.mobilelele.web;
 
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
+import bg.softuni.mobilelele.model.dto.offer.SearchOfferDTO;
 import bg.softuni.mobilelele.services.brand.IBrandService;
 import bg.softuni.mobilelele.services.offer.IOfferService;
 import org.springframework.data.domain.Pageable;
@@ -71,7 +72,26 @@ public class OffersController {
 
     @GetMapping("/{id}/details")
     public String getOfferDetails(@PathVariable("id") UUID id) {
-
         return "details";
+    }
+
+    @GetMapping("/search")
+    public String search(@Valid SearchOfferDTO searchOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addAttribute("searchOfferModel", searchOfferDTO);
+            redirectAttributes.addAttribute("org.springframework.validation.BindingResult.searchOfferModel", bindingResult);
+
+            return "offer-search";
+        }
+
+        if (!model.containsAttribute("searchOfferModel")) {
+            model.addAttribute("searchOfferModel", searchOfferDTO);
+        }
+
+        if (!searchOfferDTO.isEmpty()) {
+            model.addAttribute("offers", this.offerService.searchOffer(searchOfferDTO));
+        }
+
+        return "offer-search";
     }
 }
