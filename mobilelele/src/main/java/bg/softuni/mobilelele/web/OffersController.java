@@ -33,7 +33,7 @@ public class OffersController {
     }
 
     @GetMapping("/all")
-    public String allOffers(Model model, @PageableDefault(page = 0, size = 5, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
+    public String allOffers(Model model, @PageableDefault(size = 5, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
 
         model.addAttribute("offers", this.offerService.getAllOffers(pageable));
 
@@ -76,10 +76,10 @@ public class OffersController {
     }
 
     @GetMapping("/search")
-    public String search(@Valid SearchOfferDTO searchOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String search(@Valid SearchOfferDTO searchOfferDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addAttribute("searchOfferModel", searchOfferDTO);
-            redirectAttributes.addAttribute("org.springframework.validation.BindingResult.searchOfferModel", bindingResult);
+            model.addAttribute("searchOfferModel", searchOfferDTO);
+            model.addAttribute("org.springframework.validation.BindingResult.searchOfferModel", bindingResult);
 
             return "offer-search";
         }
