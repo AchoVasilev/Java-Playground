@@ -79,6 +79,16 @@ public class OffersController {
         return "details";
     }
 
+    @GetMapping("/{id}/edit")
+    public String editOffer(@PathVariable("id") UUID id, Model model) {
+        var offer = this.offerService.getEditOfferDetails(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Offer with Id " + id + " not found"));
+
+        model.addAttribute("offer", offer);
+
+        return "details";
+    }
+
     //@PreAuthorize("@offerService.isOwner(#principal.name, #id)")
     @PreAuthorize("@isOwner(#id)")
     @DeleteMapping("/{id}")

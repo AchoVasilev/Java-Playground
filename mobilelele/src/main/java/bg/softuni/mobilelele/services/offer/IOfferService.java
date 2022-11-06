@@ -1,6 +1,7 @@
 package bg.softuni.mobilelele.services.offer;
 
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
+import bg.softuni.mobilelele.model.dto.offer.EditOfferDTO;
 import bg.softuni.mobilelele.model.dto.offer.OfferDetailsDTO;
 import bg.softuni.mobilelele.model.dto.offer.SearchOfferDTO;
 import org.springframework.data.domain.Page;
@@ -23,4 +24,6 @@ public interface IOfferService {
     void deleteOfferById(UUID offerId);
 
     boolean isOwner(String userName, UUID offerId);
+
+    Optional<EditOfferDTO> getEditOfferDetails(UUID offerId);
 }

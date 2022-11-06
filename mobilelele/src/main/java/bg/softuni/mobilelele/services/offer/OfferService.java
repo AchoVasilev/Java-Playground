@@ -1,6 +1,7 @@
 package bg.softuni.mobilelele.services.offer;
 
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
+import bg.softuni.mobilelele.model.dto.offer.EditOfferDTO;
 import bg.softuni.mobilelele.model.dto.offer.OfferDetailsDTO;
 import bg.softuni.mobilelele.model.dto.offer.SearchOfferDTO;
 import bg.softuni.mobilelele.model.entity.UserEntity;
@@ -71,6 +72,11 @@ public class OfferService implements IOfferService {
     public Optional<OfferDetailsDTO> findOfferById(UUID offerId) {
         return this.offerRepository.findById(offerId)
                 .map(offerEntity -> this.offerMapper.offerEntityToOfferDetailsDTO(offerEntity));
+    }
+
+    public Optional<EditOfferDTO> getEditOfferDetails(UUID offerId) {
+        return this.findOfferById(offerId)
+                .map(offerDetails -> this.offerMapper.detailsOfferDtoToEditOfferDto(offerDetails));
     }
 
     public void deleteOfferById(UUID offerId) {

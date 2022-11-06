@@ -37,7 +37,7 @@
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link" href="/">Update</a>
+                <a class="card-link" th:href="@{/offers/{id}/edit(id=*{id})}">Update</a>
 
                 <form th:action="@{/offers/{id}(id=*{id})}" th:method="delete">
 

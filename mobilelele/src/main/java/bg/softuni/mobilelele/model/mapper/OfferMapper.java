@@ -1,6 +1,7 @@
 package bg.softuni.mobilelele.model.mapper;
 
 import bg.softuni.mobilelele.model.dto.offer.AddOfferInputModel;
+import bg.softuni.mobilelele.model.dto.offer.EditOfferDTO;
 import bg.softuni.mobilelele.model.dto.offer.OfferDetailsDTO;
 import bg.softuni.mobilelele.model.entity.OfferEntity;
 import org.mapstruct.Mapper;
@@ -17,4 +18,6 @@ public interface OfferMapper {
     @Mapping(source = "seller.firstName", target = "sellerFirstName")
     @Mapping(source = "seller.lastName", target = "sellerLastName")
     OfferDetailsDTO offerEntityToOfferDetailsDTO(OfferEntity offerEntity);
+
+    EditOfferDTO detailsOfferDtoToEditOfferDto(OfferDetailsDTO offerDetails);
 }
