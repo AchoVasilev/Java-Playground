@@ -7,4 +7,8 @@ import java.util.Locale;
 public interface IUserService {
 
 	void registerAndLogin(UserRegisterInputModel model, Locale preferredLocale);
+
+	void createUserIfNotExist(String email);
+
+	void login(String userEmail);
 }

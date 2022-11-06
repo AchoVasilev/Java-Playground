@@ -1,5 +1,14 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: todo
+            client-secret: todo
 mail:
   host: "localhost"
   port: 1025
   username: "mobilele@mobilele.com"
   password: ""
+

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Locale;
 
 
@@ -34,19 +35,33 @@ public class UserService implements IUserService {
         this.emailService = emailService;
     }
 
+    public void createUserIfNotExist(String email) {
+        var userOpt = this.userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            var newUser = new UserEntity()
+                    .setEmail(email)
+                    .setPassword(null)
+                    .setFirstName("New")
+                    .setLastName("User")
+                    .setUserRoles(List.of());
+
+            this.userRepository.save(newUser);
+        }
+    }
+
     public void registerAndLogin(UserRegisterInputModel model, Locale preferredLocale) {
         var user = this.userMapper.userDtoToUserEntity(model);
         user.setPassword(this.passwordEncoder.encode(model.getPassword()));
 
         user = this.userRepository.save(user);
 
-        this.login(user);
+        this.login(user.getEmail());
 
         this.emailService.sendRegistrationEmail(user.getEmail(), user.getFirstName() + " " + user.getLastName(), preferredLocale);
     }
 
-    private void login(UserEntity entity) {
-       var userDetails = this.userDetailsService.loadUserByUsername(entity.getEmail());
+    public void login(String userEmail) {
+       var userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
        var auth = new UsernamePasswordAuthenticationToken(
                userDetails,
