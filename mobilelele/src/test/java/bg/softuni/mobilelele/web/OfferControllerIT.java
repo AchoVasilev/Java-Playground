@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -20,10 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class OfferControllerIT {
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private TestDataUtils testDataUtils;
-
     private OfferEntity testOffer;
     private OfferEntity testAdminOffer;
 
@@ -76,5 +76,22 @@ public class OfferControllerIT {
                         .with(csrf()))
                 .andExpect(status().isForbidden())
                 .andExpect(view().name("redirect:/offers/all"));
+    }
+
+    @Test
+    @WithUserDetails(value = "user@user.com")
+    public void testAddOffer() throws Exception {
+        this.mockMvc.perform(post("/offers/add")
+                .param("modelId", "1")
+                .param("price", "12345")
+                .param("engine", "GASOLINE")
+                .param("transmission", "MANUAL")
+                .param("year", "1989")
+                .param("mileage", "100000")
+                .param("description", "test")
+                .param("imageUrl", "image://image.url")
+                .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/offers/all"));
     }
 }
